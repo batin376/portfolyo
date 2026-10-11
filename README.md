@@ -1,28 +1,67 @@
-# Kemal Batın Kayabaşı — Portfolyo
+# Kemal Batın Kayabaşı · Kişisel Portfolyo
 
-Uzay temalı, animasyonlu ve tam ekran kaydırmalı kişisel portfolyo. Derleme veya paket kurulumu gerekmez.
+Projelerimi, öğrenme sürecimi ve Simurg Roket Takımı ile biriktirdiğim anıları paylaştığım kişisel web sitem.
 
-## Açılış
-VS Code'da `index.html` üzerinde sağ tık → **Open with Live Server** veya **Go Live**.
-Alternatif: `python -m http.server 5500` çalıştırıp `http://localhost:5500` adresini aç.
+**[Siteyi ziyaret et →](https://batin376.github.io/portfolyo/)**
 
-## Dosyalar
-- `index.html`: bölüm yapısı ve gezinme.
-- `styles.css`: renkler, düzen, mobil görünüm ve video kenar maskesi.
-- `script.js`: bölüm geçişleri, galeri ve büyütme.
-- `black-hole.js`: karadelik videosunun görünürlük ve hareket tercihlerine göre oynatılması.
-- `content.js`: hakkımda metni, proje notları ve fotoğraf açıklamaları.
-- `assets/`: site görselleri, yerel karadelik videosu ve poster.
+HTML, CSS ve JavaScript ile geliştirildi. GitHub Pages üzerinde yayımlanır; derleme veya paket kurulumu gerektirmez.
 
-## Kullanım
-Kaydırma, bölüm bağlantıları veya yön / Page Up / Page Down tuşları ile gezin. Mobilde uzun bölümler normal kaydırılır. Galeri fotoğraflarını düğmelerle veya yatay dokunma hareketiyle değiştir. Büyütülmüş fotoğrafı Escape ile kapat; sağ ve sol okla değiştir.
+## Site hakkında
 
-Sol alttaki kontrol animasyonları duraklatır. Sistemindeki hareket azaltma tercihi de uygulanır. Karadelik videosu görünümden çıktığında veya sekme arka plana geçtiğinde durur.
+- **Giriş:** Kısa bir tanıtım, profil fotoğrafı ve uzay temalı hareketli bir arka plan.
+- **Hakkımda:** Bilgisayar mühendisliği eğitimim, ilgi alanlarım ve bu siteyi oluşturma amacım.
+- **Simurg Roket Takımı:** TEKNOFEST sürecinde aviyonik ve yazılım alanındaki deneyimlerim ve fotoğraf galerisi.
 
-## Karadelik hareketi
-`karadelik hareketi/ab11b8cf0450bc67532b771e22d3ec48_720w.mp4` örneği `assets/black-hole-motion.mp4` olarak projeye alındı. Önceki WebGL çizimi yerine, örnekteki eğimli parlak disk ve hareketli mavi gaz bulutları doğrudan bu yerel videodan gösterilir. Bu sürüm fizik simülasyonu yapmaz.
+## Özellikler
 
-Video sessiz ve mobilde satır içinde oynar. `assets/black-hole-ping-pong.mp4`, kaynak videoyu 1,5 kat yavaşlatılmış hızla önce ileri, sonra aynı hızla geri oynatan 30,125 saniyelik döngüdür. Hız ve ters hareket dosyaya işlenmiştir; tarayıcı tek videoyu yerel `loop` özelliğiyle oynatır. Yön değişimlerinde uç kareler fazladan tekrarlanmaz. Kaynak video korunur; `.qa/build-ping-pong.py` döngü dosyasını yeniden üretir (OpenCV ve imageio-ffmpeg gerektirir). Duraklatma, görünürlük ve hareket azaltma tercihleri uygulanır. Karadeliğin yanındaki tarih ve saat Türkiye saatine göre saniyede bir güncellenir. Yatay kadraj ve eliptik yumuşak maske videonun kenarlarını uzay arka planına yedirir. `assets/black-hole-poster.jpg` ilk kareyi gösterir. Eski karadelik görselleri assets klasöründe tutulmuştur.
+- Masaüstü ve mobil ekranlara uyumlu tasarım.
+- İleri ve geri yönde, eşit hızda oynayan karadelik videosu.
+- Klavye ve dokunma desteğiyle fotoğraf galerisi ve büyütülmüş görünüm.
+- Animasyonları duraklatma kontrolü ve sistemin hareket azaltma tercihine destek.
+- Görünümden çıkan veya arka planda kalan videoyu duraklatma.
 
-Google Fonts erişilemezse yerel yazı tipleri kullanılır. Görseller, video ve temel işlevler yereldir.
+## Kullanılan teknolojiler
+
+| Teknoloji | Kullanım |
+| --- | --- |
+| HTML5 | Sayfa yapısı ve içerik |
+| CSS3 | Duyarlı düzen, görsel tema ve geçişler |
+| JavaScript | Gezinme, galeri ve video kontrolleri |
+| GitHub Pages | Statik site yayını |
+
+## Yerel geliştirme
+
+Depoyu klonla ve proje klasörüne geç:
+
+```sh
+git clone https://github.com/batin376/portfolyo.git
+cd portfolyo
+```
+
+Python yüklüyse yerel sunucuyu başlat:
+
+```sh
+python -m http.server 5500
+```
+
+Ardından [localhost:5500](http://localhost:5500/) adresini aç. Alternatif olarak VS Code'daki Live Server eklentisini kullanabilirsin.
+
+## Dosya yapısı
+
+```text
+portfolyo/
+├── index.html       # Sayfa yapısı ve ana metinler
+├── styles.css       # Tema ve ekran boyutlarına uyum
+├── script.js        # Gezinme ve fotoğraf galerisi
+├── content.js       # Hakkımda metni ve galeri görselleri
+├── black-hole.js    # Video oynatma ve hareket tercihleri
+├── assets/          # Fotoğraflar, video ve diğer görseller
+└── .nojekyll        # GitHub Pages için doğrudan statik yayın
+```
+
+## Yayın
+
+Site, `main` dalının kök dizininden GitHub Pages ile yayımlanır. Bu dala gönderilen değişiklikler yayın süreci tamamlandığında siteye yansır.
+
+**[Canlı site](https://batin376.github.io/portfolyo/) · [GitHub profilim](https://github.com/batin376)**
 
