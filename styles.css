@@ -69,5 +69,6 @@ dialog{border:1px solid var(--line);padding:55px 20px 18px;background:#0c0d10;co
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.pages{scroll-behavior:auto}.reveal{opacity:1;transform:none}}
 
 @media(max-width:800px){.hero{display:grid;gap:0;align-content:center;padding-top:calc(var(--header) + 24px);padding-bottom:90px}.hero h1,.hero .role,.hero .intro{max-width:100%}.hero .portrait-frame{margin-bottom:18px}.hero h1{margin-bottom:18px}.hero .intro{margin-bottom:15px}.hero .black-hole-scene{max-width:550px;justify-self:center}.hero .black-hole-tilt{max-width:100%}}
+@media(max-width:800px){.page:not(.hero):not(.contact)>.section-footer,.hero .section-footer .scroll-cue,.header nav span,.contact-arrow{display:none}.hero>.section-footer{position:static;justify-content:center;margin-top:16px}.hero .section-footer .coordinate{margin:0;text-align:center;font-size:11px}}
 
 
