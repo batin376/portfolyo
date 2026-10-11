@@ -38,6 +38,7 @@ dialog{border:1px solid var(--line);padding:55px 20px 18px;background:#0c0d10;co
 .black-hole-tilt{mask-image:radial-gradient(ellipse 51% 49% at 50% 50%,#000 38%,#000c 60%,transparent 99%);-webkit-mask-image:radial-gradient(ellipse 51% 49% at 50% 50%,#000 38%,#000c 60%,transparent 99%);animation:cinematic-reveal 1.8s ease-out both}.black-hole-video{aspect-ratio:1.35;object-fit:cover;object-position:50% 47%;filter:none}
 @keyframes cinematic-reveal{from{opacity:0}to{opacity:1}}
 .coordinate{font-variant-numeric:tabular-nums;white-space:nowrap}
+.hero .section-footer .coordinate{position:static;display:block;margin-left:auto;text-align:right;font-size:clamp(9px,.8vw,11px);letter-spacing:1px}
 @media(max-width:1000px){.coordinate{display:block;font-size:10px;letter-spacing:1px}}
 @media(max-width:800px){.coordinate{right:8px;bottom:0;font-size:9px}}
 @media(min-width:801px){.black-hole-tilt{width:106%;max-width:860px;flex:none}}
