@@ -3,6 +3,7 @@
   const content = window.portfolioContent;
   const pages = document.querySelector('.pages');
   const sections = [...document.querySelectorAll('.page')];
+  document.querySelector('#section-total').textContent = String(sections.length).padStart(2, '0');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const motionToggle = document.querySelector('#motion-toggle');
   let paused = reduceMotion.matches;

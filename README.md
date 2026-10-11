@@ -10,6 +10,7 @@ HTML, CSS ve JavaScript ile geliştirildi. GitHub Pages üzerinde yayımlanır; 
 
 - **Giriş:** Kısa bir tanıtım, profil fotoğrafı ve uzay temalı hareketli bir arka plan.
 - **Hakkımda:** Bilgisayar mühendisliği eğitimim, ilgi alanlarım ve bu siteyi oluşturma amacım.
+- **Kullandığım Teknolojiler:** Yazılım dilleri, araçlar ve üzerinde çalıştığım alanlar.
 - **Simurg Roket Takımı:** TEKNOFEST sürecinde aviyonik ve yazılım alanındaki deneyimlerim ve fotoğraf galerisi.
 
 ## Özellikler
