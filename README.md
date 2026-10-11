@@ -12,6 +12,7 @@ HTML, CSS ve JavaScript ile geliştirildi. GitHub Pages üzerinde yayımlanır; 
 - **Hakkımda:** Bilgisayar mühendisliği eğitimim, ilgi alanlarım ve bu siteyi oluşturma amacım.
 - **Kullandığım Teknolojiler:** Yazılım dilleri, araçlar ve üzerinde çalıştığım alanlar.
 - **Simurg Roket Takımı:** TEKNOFEST sürecinde aviyonik ve yazılım alanındaki deneyimlerim ve fotoğraf galerisi.
+- **Kapanış ve iletişim:** Gelecek projelere kısa bir not, iletişim seçenekleri ve sade bir footer.
 
 ## Özellikler
 

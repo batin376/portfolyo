@@ -3,8 +3,8 @@
   const content = window.portfolioContent;
   const pages = document.querySelector('.pages');
   const sections = [...document.querySelectorAll('.page')];
-  document.querySelector('#section-total').textContent = String(sections.length).padStart(2, '0');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const freeScroll = window.matchMedia('(max-width: 800px), (pointer: coarse)');
   const motionToggle = document.querySelector('#motion-toggle');
   let paused = reduceMotion.matches;
   let activeSection = 0;
@@ -46,7 +46,6 @@
   function setActive(index) {
     activeSection = index;
     sections.forEach((section, i) => section.classList.toggle('is-active', i === index));
-    document.querySelector('#section-number').textContent = String(index + 1).padStart(2, '0');
     document.querySelectorAll('.section-nav a, .header nav a').forEach(link => {
       const active = link.hash === '#' + sections[index].id;
       link.classList.toggle('active', active);
@@ -57,7 +56,10 @@
   const observer = new IntersectionObserver(entries => {
     for (const entry of entries) {
       // A long mobile section can occupy the entire viewport without 50% of itself being visible.
-      if (entry.isIntersecting) setActive(sections.indexOf(entry.target));
+      if (entry.isIntersecting) {
+        entry.target.classList.add('has-revealed');
+        setActive(sections.indexOf(entry.target));
+      }
     }
   }, { root: pages, rootMargin: '-35% 0px -35% 0px', threshold: 0 });
   sections.forEach(section => observer.observe(section));
@@ -76,8 +78,9 @@
       goTo(index);
     });
   });
-  // One wheel gesture advances one screen on desktop; long sections retain native scrolling.
+  // Touch devices and narrow screens always retain native, continuous scrolling.
   pages.addEventListener('wheel', event => {
+    if (freeScroll.matches) return;
     if (dialog.open || event.ctrlKey || Math.abs(event.deltaY) < Math.abs(event.deltaX) || Math.abs(event.deltaY) < 4) return;
     const section = sections[activeSection];
     if (section.offsetHeight > pages.clientHeight + 8) return;
@@ -99,7 +102,7 @@
       return;
     }
     if (event.target.closest('button, a, summary, input, textarea, select, [contenteditable]')) return;
-    const shortSection = sections[activeSection].offsetHeight <= pages.clientHeight + 8;
+    const shortSection = !freeScroll.matches && sections[activeSection].offsetHeight <= pages.clientHeight + 8;
     if ((event.key === 'ArrowDown' || event.key === 'PageDown') && shortSection) { event.preventDefault(); goTo(activeSection + 1); }
     if ((event.key === 'ArrowUp' || event.key === 'PageUp') && shortSection) { event.preventDefault(); goTo(activeSection - 1); }
     if (event.key === 'Home') { event.preventDefault(); goTo(0); }
@@ -111,6 +114,35 @@
   }
   window.addEventListener('hashchange', openHash);
   window.addEventListener('load', openHash);
+
+  const emailCopy = document.querySelector('#copy-email');
+  const emailStatus = document.querySelector('#email-copy-status');
+  let emailReset = 0;
+  emailCopy.addEventListener('click', async () => {
+    clearTimeout(emailReset);
+    let copied = false;
+    try {
+      await navigator.clipboard.writeText(emailCopy.dataset.email);
+      copied = true;
+    } catch {
+      // Support browsers where the Clipboard API is unavailable or blocked.
+      const field = document.createElement('textarea');
+      field.value = emailCopy.dataset.email;
+      field.readOnly = true;
+      field.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
+      document.body.append(field);
+      field.select();
+      try { copied = document.execCommand('copy'); } catch { /* Show failure below. */ }
+      field.remove();
+      emailCopy.focus({ preventScroll: true });
+    }
+    emailStatus.textContent = copied ? 'Kopyalandı' : 'Kopyalanamadı';
+    emailCopy.classList.toggle('is-copied', copied);
+    emailReset = setTimeout(() => {
+      emailStatus.textContent = 'E-posta';
+      emailCopy.classList.remove('is-copied');
+    }, 2500);
+  });
 
   content.photos.forEach((photo, index) => {
     const dot = document.createElement('button');
@@ -142,10 +174,15 @@
   document.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => { if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); } });
   let touchStartX = 0;
-  document.querySelector('.gallery-image-button').addEventListener('touchstart', event => { touchStartX = event.changedTouches[0].clientX; }, { passive: true });
+  let touchStartY = 0;
+  document.querySelector('.gallery-image-button').addEventListener('touchstart', event => {
+    touchStartX = event.changedTouches[0].clientX;
+    touchStartY = event.changedTouches[0].clientY;
+  }, { passive: true });
   document.querySelector('.gallery-image-button').addEventListener('touchend', event => {
     const delta = event.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(delta) > 50) {
+    const deltaY = event.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(delta) > 50 && Math.abs(delta) > Math.abs(deltaY)) {
       showPhoto(currentPhoto + (delta < 0 ? 1 : -1));
       // Cancel only the click synthesized from a horizontal swipe.
       const preventClick = click => { click.preventDefault(); click.stopImmediatePropagation(); };
